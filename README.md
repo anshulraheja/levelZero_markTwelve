@@ -11,9 +11,9 @@ The website has the following features:
 - Quiz on the triangle
 
 
-<img src="./src/assets/Images//markTwelve_1.jpg" alt="alt text" width="100" height="100">
-<img src="./src/assets/Images//markTwelve_2.jpg" alt="alt text" width="100" height="100">
-<img src="./src/assets/Images//markTwelve_3.jpg" alt="alt text" width="100" height="100">
+<img src="./src/assets/Images//markTwelve_1.jpg" alt="alt text" width="200" height="200">
+<img src="./src/assets/Images//markTwelve_2.jpg" alt="alt text" width="250" height="250">
+<img src="./src/assets/Images//markTwelve_3.jpg" alt="alt text" width="300" height="300">
 
 ### My Learnings
 - React Router -> BrowserRouter, Route, Switch, Link
