@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
-const AreaBH = (props) => {
-  const [result, setResult] = useState("Area= √s(s-a)(s-b)(s-c)");
+
+const AreaBH = () => {
+  const [result, setResult] = useState();
   const [valueOfA, setValueOfA] = useState("");
   const [valueOfB, setValueOfB] = useState("");
   const [valueOfC, setValueOfC] = useState("");
@@ -17,8 +19,16 @@ const AreaBH = (props) => {
     }
   };
 
+  const handleSubmit = (e)=>{
+    console.log('prevent')
+    e.preventDefault();
+  }
   return (
-    <form className="form" id="formTriangle" onSubmit={props.submit}>
+    <div className="box">
+      <Link to="/area" className="backButton">
+        ᐊ BACK
+      </Link>
+    <form className="form" id="formTriangle" onSubmit={handleSubmit}>
       <label>
         a=
         <input
@@ -61,9 +71,10 @@ const AreaBH = (props) => {
       <button className="button" onClick={showResult}>
         calculate
       </button>
-      <h2>Area will be calculated here-</h2>
+      <h2>Area= √s(s-a)(s-b)(s-c):</h2>
       <div className="output">{result}</div>
     </form>
+    </div>
   );
 };
 

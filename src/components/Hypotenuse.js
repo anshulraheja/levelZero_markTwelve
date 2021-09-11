@@ -1,8 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const Hypotenuse = (props) => {
-  const [result, setResult] = useState("C=√(a2+b2)");
+  const [result, setResult] = useState();
   const [valueOfA, setValueOfA] = useState("");
   const [valueOfB, setValueOfB] = useState("");
 
@@ -17,13 +18,15 @@ const Hypotenuse = (props) => {
     }
   };
 
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+  }
+  
   return (
     <div className="box">
-      <span onClick={props.back} className="backButton">
-        ᐊ BACK
-      </span>
+    <Link to="/" className="backButton">ᐊ BACK</Link>
       <h2>Enter the lengths of sides of right angle triangle</h2>
-      <form className="form" id="formTriangle" onSubmit={props.submit}>
+      <form className="form" id="formTriangle" onSubmit={handleSubmit}>
         <label>
           a =
           <input
@@ -53,7 +56,7 @@ const Hypotenuse = (props) => {
         <button className="button" onClick={showResult}>
           submit
         </button>
-        <h2>Hypotenuse will be calculated here-</h2>
+        <h2>Hypotenuse Length (C=√(a2+b2)):</h2>
         <div className="output">{result}</div>
       </form>
     </div>

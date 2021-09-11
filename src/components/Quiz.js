@@ -1,216 +1,49 @@
-import React from "react";
-import { useState } from "react";
+  import React from "react";
+  import { useState } from "react";
+  import { Link } from 'react-router-dom';
+  import QuestionBank from '../assets/QuestionBank'
 
-const Quiz = (props) => {
-  const [result, setResult] = useState(
-    "Score: For each correct answer you will get 1 point"
-  );
+  const Quiz = (props) => {
+  const [result, setResult] = useState();
+  const [score, setScore] = useState(0);
+  const [response, setResponse] = useState(0);
+  const length = QuestionBank.length
 
-  const rightAns = ["yes", "no", "yes", "yes", "yes", "Isosceles", "Scalene"];
-
-  const showResult = () => {
-    const quizForm = document.querySelector("#formTriangle");
-
-    const data = new FormData(quizForm);
-    let index = 0,
-      score = 0;
-    for (let entry of data.values()) {
-      if (entry === rightAns[index]) {
-        score++;
-      }
-      index++;
+  function computeAnswer(answer, correctAnswer) {
+    if (answer === correctAnswer) {
+      const newScore = score + 1;
+      setScore(newScore);
     }
-    setResult(`Your score is ${score}`);
-  };
+    const newResponse = response < length ? response + 1 : length;
+    setResponse(newResponse);
+  }
+
+  function showResult(){
+    console.log(response);
+    if(response==length)
+    setResult(score);
+    else
+    setResult("Please mark answers for all questions")
+  }
+
+  const handleSubmit = (e)=>{
+    e.preventDefault();
+  }
 
   return (
     <div className="box">
-      <span onClick={props.back} className="backButton">
+      <Link to="/" className="backButton">
         ᐊ BACK
-      </span>
-      <form className="form" id="formTriangle" onSubmit={props.submit}>
-        <div className="questions">
-          <p>
-            If a triangle has angles 135°, 15°, 30°. Is it an obtuse triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="yes"
-              name="question1"
-            />
-            yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="no"
-              name="question1"
-            />
-            no
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            If a triangle has angles 115°, 25°, 40°. Is it an acute triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="yes"
-              name="question2"
-            />
-            yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="no"
-              name="question2"
-            />
-            no
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            If a triangle has angles 90°, 60°, 30°. Is it a right angle
-            triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="yes"
-              name="question3"
-            />
-            yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="no"
-              name="question3"
-            />
-            no
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            A triangle has angles 60°, 60°, 60°. Is it an equilateral triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="yes"
-              name="question4"
-            />
-            yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="no"
-              name="question4"
-            />
-            no
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            If a triangle has angles 25°, 75°, 80°. Is it an acute triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="yes"
-              name="question5"
-            />
-            yes
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="no"
-              name="question5"
-            />
-            no
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            If a triangle has 2 sides with equal lengths and 750 angle between
-            them. What is the type of triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Equilateral"
-              name="question6"
-            />
-            Equilateral
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Isosceles"
-              name="question6"
-            />
-            Isosceles
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Right Angle traingle"
-              name="question6"
-            />
-            Right Angle traingle
-          </label>
-        </div>
-        <div className="questions">
-          <p>
-            If a triangle has sides of 2cm, 3cm, 4cm, what is the type of
-            triangle?
-          </p>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Equilateral"
-              name="question7"
-            />
-            Equilateral
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Isosceles"
-              name="question7"
-            />
-            Isosceles
-          </label>
-          <label>
-            <input
-              type="radio"
-              required="required"
-              value="Scalene"
-              name="question7"
-            />
-            Scalene
-          </label>
-        </div>
+      </Link>
+      <form className="form" id="formTriangle" onSubmit={handleSubmit}>
+       { QuestionBank.map(({ question, options, correct, questionId }) => (
+          <QuestionBox
+            question={question}
+            options={options}
+            keys={questionId}
+            selected={(answer) => computeAnswer(answer, correct)}
+          />
+        ))}
         <button className="button" onClick={showResult}>
           submit
         </button>
@@ -218,6 +51,31 @@ const Quiz = (props) => {
       </form>
     </div>
   );
+}
+
+
+const QuestionBox = ({ question, options, selected }) => {
+  const [answer, setAnswer] = useState(options);
+  console.log(options);
+  function hideIncorrect(text) {
+    setAnswer([text]);
+    selected(text);
+  }
+  return (
+    <div className="questions">
+      <p>{question}</p>
+      {answer.map((text, index) => (
+        <button
+          className="btn"
+          key={index}
+          onClick={options.length > 1 ? () => hideIncorrect(text): null}
+        >
+          {text}
+        </button> 
+      ))}
+    </div>
+  );
 };
 
-export default Quiz;
+
+  export default Quiz;

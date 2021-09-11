@@ -1,64 +1,28 @@
 import "./styles.css";
-import { useState } from "react";
+import {Route, Switch } from 'react-router-dom';
+import Home from "./components/Home"
 import Triangle from "./components/Triangle";
 import Hypotenuse from "./components/Hypotenuse";
 import Quiz from "./components/Quiz";
 import Area from "./components/Area";
+import AreaBH from "./components/subComponents/AreaBH";
+import Area3S from "./components/subComponents/Area3S";
+import Area2SA from "./components/subComponents/Area2SA";
 
 export default function App() {
-  const backClicker = () => {
-    setScreen(
-      <div className="box">
-        <h1>Welcome to Fun with Triangles</h1>
-        <div className="container">
-          {features.map((feature) => {
-            return (
-              <span onClick={feactureClick} className="feature">
-                {feature}
-              </span>
-            );
-          })}
-        </div>
-      </div>
-    );
-  };
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-  };
-
-  const pages = {
-    "Angles of Triangle?": <Triangle back={backClicker} submit={onSubmit} />,
-    "Check hypotenuse": <Hypotenuse back={backClicker} submit={onSubmit} />,
-    "Calculate Area": <Area back={backClicker} submit={onSubmit} />,
-    "Take a Quiz": <Quiz back={backClicker} submit={onSubmit} />
-  };
-
-  const features = Object.keys(pages);
-
-  const feactureClick = (e) => {
-    setScreen(pages[e.target.innerText]);
-  };
-
-  const [screen, setScreen] = useState(
-    <div className="box">
-      <h1>Welcome to Fun with Triangles</h1>
-      <div className="container">
-        {features.map((feature) => {
-          return (
-            <span onClick={feactureClick} key={feature} className="feature">
-              {feature}
-            </span>
-          );
-        })}
-      </div>
-    </div>
-  );
-
-  return (
-    <div className="App">
-      {screen}
-      {/* <Footer /> */}
-    </div>
+  return (  
+    <main>
+      <Switch>
+      <Route path='/' exact component={Home} />
+      <Route path="/angle" component={Triangle} />
+      <Route path="/hypotenuse" component={Hypotenuse} />
+      <Route path="/area" component={Area} />
+      <Route path="/quiz" component={Quiz} />
+      <Route path='/areaBH'  component={AreaBH} />
+      <Route path="/area3S"  component={Area3S} />
+      <Route path="/area2SA"  component={Area2SA} />
+      </Switch>
+    </main>
   );
 }

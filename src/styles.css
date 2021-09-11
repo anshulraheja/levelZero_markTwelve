@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
 :root {
-  --base-color: #faebd7;
-  --secondary-color: #f4a460;
-  --primary-color: #deb887;
+  --base-color: rgb(212, 236, 221);
+  --secondary-color: rgb(52, 91, 99);
+  --primary-color: rgb(21, 45, 53);
+  --font-clr : #ffffff;
   user-select: none;
 }
 
@@ -10,34 +12,34 @@
   padding: 0px;
   box-sizing: border-box;
 }
-
-html {
+body{
+  font-family: 'Poppins', sans-serif;
   background: var(--base-color);
-}
+  color: var(--primary-color);
 
+}
 .box {
   margin: 0px auto;
   max-width: 600px;
   min-height: 100vh;
-  font-family: sans-serif;
   text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
-h2,
-h1 {
-  margin: 20px 10px;
-}
 .container {
-  margin: 0px auto;
-  max-width: 300px;
-  flex-wrap: wrap;
+  width: 100%;
   height: 300px;
+  background-color: var(--secondary-color);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
 }
-
+.container a {
+  color: var(--font-clr);
+}
 .feature {
   width: calc(50% - 10px);
   height: calc(50% - 10px);
@@ -45,48 +47,46 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 2px solid var(--font-clr);
+  font-size: large;
+  border-radius: 1rem;
+  cursor: pointer;
 }
 
-.feature,
+
 .backButton,
 .button,
 .areaType {
   background: var(--primary-color);
-  border: #000000 solid 2px;
+  border: var(--font-clr) solid 2px;
   font-size: large;
-  border-radius: 20px;
+  border-radius: 1rem;
   cursor: pointer;
+  color: white;
+  outline: none;
 }
 
-.backButton,
+.backButton {
+  padding: 0.8em 1.2em;
+  margin: 1rem 1rem;
+  align-self: flex-start;
+}
+
 .button,
 .areaType {
-  padding: 10px 20px;
+  padding: 0.8em 1.2em;
   display: block;
-  margin: 20px auto;
-}
-
-.feature:hover,
-.backButton:hover,
-.button:hover {
-  color: #ffffff;
-}
-
-.feature:active,
-.backButton:active,
-.button:active,
-.areaType:active {
-  background: var(--secondary-color);
+  margin: 10px auto;
 }
 
 .inputBox,
 .output,
 .questions {
-  background: var(--secondary-color);
-  padding: 20px;
-  margin: 20px;
-  border: #000000 solid 2px;
+  padding: 1.2em;
+  margin: 1em;
+  border: var(--primary-color) solid 2px;
   font-size: large;
+  overflow:none;
 }
 
 .questions,
@@ -103,7 +103,14 @@ input[type="number"] {
   width: 124px;
 }
 
-input[type="radio"],
-.areaBox {
-  margin: 10px;
+.btn {
+  padding: 0.5em 0.8em;
+  margin: 8px auto;
+  background: var(--primary-color);
+  border: var(--font-clr) solid 1px;
+  font-size: large;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  color: white;
+  outline: none;
 }
